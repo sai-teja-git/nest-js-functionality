@@ -9,6 +9,8 @@ import { env } from 'process';
 import { EncryptionService } from './services/encryption.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpInterceptor } from './services/http.interceptor';
+import { MongooseModule } from '@nestjs/mongoose';
+import { MenuScreenMappingModule } from './menu-screen-mapping/menu-screen-mapping.module';
 
 @Module({
   imports: [
@@ -20,17 +22,23 @@ import { HttpInterceptor } from './services/http.interceptor';
       secret: env.JWT_SECRET_KEY,
       signOptions: { expiresIn: env.JWT_TOKEN_LIFE }
     }),
+    MongooseModule.forRootAsync({
+      useFactory: () => ({
+        uri: env.MONGO_DB_CLOUD_URL,
+      }),
+    }),
     FileOperationModule,
+    MenuScreenMappingModule,
     UserModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
     EncryptionService,
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: HttpInterceptor,
-    },
+    // {
+    //   provide: APP_INTERCEPTOR,
+    //   useClass: HttpInterceptor,
+    // },
   ],
 })
 export class AppModule { }
