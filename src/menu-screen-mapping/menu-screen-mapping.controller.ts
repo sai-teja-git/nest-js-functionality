@@ -15,6 +15,21 @@ export class MenuScreenMappingController {
     return this.menuScreenMappingService.updateMenu(object.id, body)
   }
 
+  @Get("graph-data")
+  getMonthGraph(@Param() object) {
+    return this.menuScreenMappingService.getMonthGraph()
+  }
+
+  @Get("table-data")
+  getTableData() {
+    return this.menuScreenMappingService.getTableData()
+  }
+
+  @Get("kpi-value")
+  getKpiValue() {
+    return this.menuScreenMappingService.getKpiValue()
+  }
+
   @Get(":id")
   getMenuScreenById(@Param() object) {
     return this.menuScreenMappingService.getMenuById(object.id)

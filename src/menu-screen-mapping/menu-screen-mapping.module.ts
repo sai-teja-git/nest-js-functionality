@@ -3,6 +3,7 @@ import { MenuScreenMappingService } from './menu-screen-mapping.service';
 import { MenuScreenMappingController } from './menu-screen-mapping.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MENU_SCREEN_MAPPING_TABLE, MenuScreenMappingSchema } from './schemas/menu-screen-mapping';
+import { HelperFunctionsService } from 'src/services/helper-functions.service';
 
 @Module({
   imports: [
@@ -14,6 +15,9 @@ import { MENU_SCREEN_MAPPING_TABLE, MenuScreenMappingSchema } from './schemas/me
     ])
   ],
   controllers: [MenuScreenMappingController],
-  providers: [MenuScreenMappingService],
+  providers: [
+    MenuScreenMappingService,
+    HelperFunctionsService
+  ],
 })
 export class MenuScreenMappingModule { }
